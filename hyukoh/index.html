@@ -1,0 +1,79 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="reset.css"><!--리셋css-->
+
+<title></title>
+
+<style>
+@media screen and (min-width:1024px) {
+/*풀 동영상 인트로 섹션 시작*/
+#intro {position:relative; width:100%; height:990px; margin:0 auto; overflow:hidden;}
+#intro .artworkZone {position:absolute; left:0; top:0; width:100%; height:100%; display:block; background:url(img/intro_vd.png) no-repeat center center; background-size:cover; z-index:2;}
+#intro .bgMovie {width:100%; height:100%; margin:auto 0; z-index:0;}
+#intro .bgMovie video#bgvid {position:absolute; right:0; bottom:0; min-width:100%; min-height:100%; width:auto; height:auto; z-index:-1; background:url(video/vd_bg.png) no-repeat center top; background-size:cover;}
+#intro .bgMovie video {display:block;}
+/*풀 동영상 인트로 섹션 끝*/
+
+#contetnts {position:relative; width:100%; height:9510px; margin:0 auto; background:url(img/contents_12c.jpg) center top no-repeat; text-indent:-10000000000px; overflow-x:hidden;}/*height값을 조정하세요*/
+
+}
+
+@media screen and (min-width:480px) and (max-width:1023px) {
+#intro .bgMovie video {display:none;}
+#contetnts {position:absolute; left:50%; top:0; margin-left:-512px; width:1024px; height:8700px; background:url(img/768.jpg) no-repeat center top; z-index:1;}
+}
+
+@media screen and (min-width:0) and (max-width:479px) {
+#intro .bgMovie video {display:none;}
+#contetnts {position:absolute; left:50%; top:0; margin-left:-170px; width:340px; height:5682px; background:url(img/320.jpg) no-repeat center top; z-index:1;}
+}
+
+</style>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script><!--제이쿼리 라이브러리 CDN-->
+
+<!--인트로 영역 벗어났을 때 동영상 스톱 시작-->
+<script type="text/javascript">
+    
+$(document).ready(function(){
+	
+	$(function(){
+		$(window).scroll(function() {
+			var sTop = $(window).scrollTop(); // 스크롤 Y 값
+			if( sTop < 900 ) {
+				$('#bgvid').get(0).play(); //intro 배경 동영상 플레이
+			} else if( sTop >= 900 ) {
+				$('#bgvid').get(0).currentTime = 0;	// 비디오 첫 프레임으로
+				$('#bgvid').get(0).pause();
+			}
+		});
+	});
+    
+});
+    
+</script>
+<!--인트로 영역 벗어났을 때 동영상 스톱 끝-->
+
+</head>
+
+<body>
+
+<div id="intro">
+
+	<div class="artworkZone"></div>
+    
+	<div class="bgMovie">
+        <video autoplay muted loop poster="video/vd_bg.png" id="bgvid">
+        	<source src="video/back_vd.webm" type="video/webm">
+        	<source src="video/back_vd.mp4" type="video/mp4">
+        	<!--<source src="video/bw.ogv" type="video/ogv">-->
+        </video>
+    </div>
+</div>
+    
+<div id="contetnts"></div>
+
+</body>
+</html>
+
